@@ -41,13 +41,41 @@ class VehicleController extends Controller
             'file.required' => 'Por favor seleccione un archivo.',
             'file.mimes' => 'El archivo debe ser un Excel (.xlsx o.xls)'
         ]);
+
+        //excel a array
+        $rows = Excel::toArray([], $request->file('file'))[0];
+        //quitar encabezados
+        array_shift($rows);
+
+        //columnas según el orden
+        foreach ($rows as $row) {
+            $user = User::firstOrCreate(
+                ['email' => $row[2]], 
+                [
+                    'name' => $row[0] . ' ' . $row[1], 
+                    'password' => bcrypt('password123')
+                ]
+            );
+
+            // crea el vehículo vinculado al usuario importado
+            $vehiculo = Vehicle::firstOrCreate(
+                ['patente' => $row[5]], // Busca si la patente ya existe
+                [
+                    'marca'   => $row[3],
+                    'modelo'  => $row[4],
+                    'anio'    => $row[6],
+                    'precio'  => $row[7],
+                    'user_id' => $user->id,
+                ]
+            );
+        }
         
-        try {
-            Excel::import(new VehiclesImport, $request->file('file'));
-            return redirect()->route('vehiculos.index')->with('message', 'Los vehículos del Excel se han cargado correctamente.');
-        } catch (\Exception $e) {
-            return redirect()->route('vehiculos.index')->with('message', 'Error al importar el archivo: ');
-        } 
+        //tabla histórica
+        if ($vehiculo->wasRecentlyCreated) {
+            $vehiculo->owners()->attach($user->id, ['fecha_adquisicion' => now()]);
+        }
+
+        return redirect('/vehiculos')->with('message', 'Vehículos cargados correctamente.');
     }
 
     public function store(Request $request)
@@ -56,25 +84,27 @@ class VehicleController extends Controller
         $data = $request->validate([
             'marca' => 'required|string',
             'modelo' => 'required|string',
-            'patente' => 'required|string',
+            'patente' => 'required|string|unique:vehicles,patente',
             'anio' => 'required|integer',   
             'precio' => 'required|integer',
             'user_id' => 'nullable|exists:users,id',
         ], [
             'user_id.exists' => 'El dueño seleccionado no es válido.',
+            'patente.unique' => 'Esa patente ya está registrada en el sistema.',
         ]);
 
         if ($request->filled('nuevo_correo')) {
-            $user = User::create([
-                'name'     => $request->nuevo_nombre . ' ' . $request->nuevo_apellidos,
-                'email' => $request->nuevo_correo,
-                'password' => bcrypt('password123'), // Contraseña por defecto
-            ]);
+            $user = User::firstOrCreate(
+                ['email' => $request->nuevo_correo],
+                [
+                    'name'     => $request->nuevo_nombre . ' ' . $request->nuevo_apellidos,
+                    'password' => bcrypt('password123'),
+                ]
+            );
             $userId = $user->id;
         } else {
             $userId = $request->user_id;
 
-            // Validación manual extra por seguridad si no hay usuario nuevo
             if (!$userId) {
                 return back()->withErrors(['user_id' => 'Debes seleccionar un dueño o crear uno nuevo.']);
             }

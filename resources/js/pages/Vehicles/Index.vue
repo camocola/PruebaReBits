@@ -1,6 +1,7 @@
 <script setup>
 import AppLayout from '@/layouts/AppLayout.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
+import { router } from '@inertiajs/vue3';
 
 const props = defineProps({
     vehiculos: {
@@ -21,6 +22,10 @@ const submitImport = () => {
             formImport.reset();
             alert('Importación completada.');
         },
+        onError: () => {
+            console.error(errors);
+            alert('Error al importar: Revisa el formato del archivo.');
+        }
     });
 };
 

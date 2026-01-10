@@ -26,12 +26,14 @@ const form = useForm({
 const submit = () => {
     form.post('/vehiculos', {
         onSuccess: () => {
-            alert('Vehículo y dueño registrados correctamente.'); // Mensaje original preservado
+            alert('Vehículo y dueño registrados correctamente.');
             form.reset();
         },
         onError: (errors) => {
+            if (!errors.patente) {
+                alert('Error: Revisa que falten datos obligatorios.');
+            }
             console.error(errors);
-            alert('Error: Revisa que la patente no esté repetida o falten datos.'); // Mensaje original preservado
         }
     });
 };
@@ -55,6 +57,9 @@ const submit = () => {
                     <div>
                         <label class="text-xs font-bold uppercase text-gray-500">Patente</label>
                         <Input v-model="form.patente" placeholder="Ej: AB1234" class="uppercase" required />
+                        <div v-if="form.errors.patente" class="text-red-600 text-xs mt-1 font-bold animate-pulse">
+                            {{ form.errors.patente }}
+                        </div>
                     </div>
                     <div>
                         <label class="text-xs font-bold uppercase text-gray-500">Año</label>
