@@ -3,17 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Vehicle;
-use Illuminate\Http\Request;
 use App\Models\User;
-
-//carga de excel
-use App\Imports\VehiclesImport;
-use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Maatwebsite\Excel\Facades\Excel;
 
 class VehicleController extends Controller
 {
-    //listado vehiculos
+    // Listado de vehículos con su dueño actual
     public function index()
     {
         return Inertia::render('Vehicles/Index', [
@@ -21,34 +18,30 @@ class VehicleController extends Controller
         ]);
     }
 
+    // Formulario de creación
     public function create()
     {
-        //obtener lista usuarios para asignar propietario vehículo
         $usuarios = User::select('id', 'name', 'email')->get();
-
         return Inertia::render('Vehicles/Create', [
             'usuarios' => $usuarios
         ]);
     }
 
-    //importar excel
+    // Importar vehículos desde Excel
     public function import(Request $request) 
     {
-        //validar archivo
         $request->validate([
-        'file' => 'required|mimes:xlsx,xls'
+            'file' => 'required|mimes:xlsx,xls'
         ], [
             'file.required' => 'Por favor seleccione un archivo.',
-            'file.mimes' => 'El archivo debe ser un Excel (.xlsx o.xls)'
+            'file.mimes' => 'El archivo debe ser un Excel (.xlsx o .xls)'
         ]);
 
-        //excel a array
         $rows = Excel::toArray([], $request->file('file'))[0];
-        //quitar encabezados
-        array_shift($rows);
+        array_shift($rows); // Quitar encabezados
 
-        //columnas según el orden
         foreach ($rows as $row) {
+            // 1. Crear o buscar al dueño
             $user = User::firstOrCreate(
                 ['email' => $row[2]], 
                 [
@@ -57,9 +50,9 @@ class VehicleController extends Controller
                 ]
             );
 
-            // crea el vehículo vinculado al usuario importado
+            // 2. Crear o buscar el vehículo por patente
             $vehiculo = Vehicle::firstOrCreate(
-                ['patente' => $row[5]], // Busca si la patente ya existe
+                ['patente' => $row[5]], 
                 [
                     'marca'   => $row[3],
                     'modelo'  => $row[4],
@@ -68,19 +61,19 @@ class VehicleController extends Controller
                     'user_id' => $user->id,
                 ]
             );
-        }
-        
-        //tabla histórica
-        if ($vehiculo->wasRecentlyCreated) {
-            $vehiculo->owners()->attach($user->id, ['fecha_adquisicion' => now()]);
+
+            // 3. Registrar siempre en el historial si el vehículo es nuevo
+            if ($vehiculo->wasRecentlyCreated) {
+                $vehiculo->owners()->attach($user->id, ['fecha_adquisicion' => now()]);
+            }
         }
 
         return redirect('/vehiculos')->with('message', 'Vehículos cargados correctamente.');
     }
 
+    // Guardar vehículo manual
     public function store(Request $request)
     {
-        // validar datos recibidos
         $data = $request->validate([
             'marca' => 'required|string',
             'modelo' => 'required|string',
@@ -104,59 +97,79 @@ class VehicleController extends Controller
             $userId = $user->id;
         } else {
             $userId = $request->user_id;
-
             if (!$userId) {
                 return back()->withErrors(['user_id' => 'Debes seleccionar un dueño o crear uno nuevo.']);
             }
         }
 
-        //datos básicos del formulario
         $vehicleData = $request->only(['marca', 'modelo', 'patente', 'anio', 'precio']);
-
-        // añadir user_id si existe
         $vehicleData['user_id'] = $userId;
 
-        // crear vehículo
         $vehiculo = Vehicle::create($vehicleData);
 
-        // tabla historial propietarios
+        // Registro inicial en historial
         if ($userId) {
             $vehiculo->owners()->attach($userId, ['fecha_adquisicion' => now()]);
         }
 
-        //vehiculo añadido correctamente
         return redirect('/vehiculos')->with('message', 'Vehículo registrado con éxito.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Vehicle $vehicle)
+    // Formulario de edición
+    public function edit($id)
     {
-        //
+        $vehiculo = Vehicle::findOrFail($id);
+        $usuarios = User::all();
+
+        return Inertia::render('Vehicles/Edit', [
+            'vehiculo' => $vehiculo,
+            'usuarios' => $usuarios
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Vehicle $vehicle)
+    // Actualizar vehículo y registrar cambio de dueño si aplica
+    public function update(Request $request, $id)
     {
-        //
+        $vehiculo = Vehicle::findOrFail($id);
+
+        $data = $request->validate([
+            'marca' => 'required',
+            'modelo' => 'required',
+            'patente' => 'required|unique:vehicles,patente,' . $id,
+            'anio' => 'required|integer',
+            'precio' => 'required|integer',
+            'user_id' => 'required|exists:users,id',
+        ]);
+
+        $duenoAnterior = $vehiculo->user_id;
+        $vehiculo->update($data);
+
+        // Registrar cambio de dueño en el historial si el ID cambió
+        if ($duenoAnterior != $request->user_id) {
+            $vehiculo->owners()->attach($request->user_id, [
+                'fecha_adquisicion' => now()
+            ]);
+        }
+
+        return redirect('/vehiculos')->with('message', 'Vehículo actualizado correctamente.');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Vehicle $vehicle)
+    // Ver historial ordenado: Actual primero
+    public function historial($id)
     {
-        //
+        $vehiculo = Vehicle::with(['user', 'owners' => function($query) {
+            $query->orderBy('fecha_adquisicion', 'desc');
+        }])->findOrFail($id);
+
+        return Inertia::render('Vehicles/History', [
+            'vehiculo' => $vehiculo,
+            'historial' => $vehiculo->owners 
+        ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Vehicle $vehicle)
     {
-        //
+        $vehicle->delete();
+        return redirect('/vehiculos')->with('message', 'Vehículo eliminado.');
     }
 }

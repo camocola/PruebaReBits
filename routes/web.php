@@ -23,4 +23,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //para importar vehículos desde excel
     Route::post('vehiculos/importar', [VehicleController::class, 'import'])->name('vehiculos.import');
+
+    Route::get('vehiculos/{id}/historial', [VehicleController::class, 'historial'])->name('vehiculos.historial');
 });

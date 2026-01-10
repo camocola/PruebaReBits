@@ -1,7 +1,6 @@
 <script setup>
 import AppLayout from '@/layouts/AppLayout.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
-import { router } from '@inertiajs/vue3';
+import { Head, Link, useForm, router } from '@inertiajs/vue3';
 
 const props = defineProps({
     vehiculos: {
@@ -20,9 +19,11 @@ const submitImport = () => {
         forceFormData: true,
         onSuccess: () => {
             formImport.reset();
+            // Refresca los datos de la tabla sin recargar toda la página
+            router.reload({ only: ['vehiculos'] }); 
             alert('Importación completada.');
         },
-        onError: () => {
+        onError: (errors) => {
             console.error(errors);
             alert('Error al importar: Revisa el formato del archivo.');
         }
@@ -94,9 +95,19 @@ const formatPrice = (value) => {
                                     {{ vehiculo.user ? vehiculo.user.name : 'Sin Dueño' }}
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900">${{ formatPrice(vehiculo.precio) }}</td>
-                                <td class="px-6 py-4 text-right text-sm font-medium">
-                                    <Link :href="'/vehiculos/' + vehiculo.id + '/edit'" class="text-indigo-600 hover:text-indigo-900 font-bold">Editar</Link>
-                                </td>
+                                <Link 
+                                    :href="'/vehiculos/' + vehiculo.id + '/historial'" 
+                                    class="text-green-600 hover:text-green-900 font-bold bg-green-50 px-3 py-1 rounded-md"
+                                >
+                                    Historial
+                                </Link>
+                                
+                                <Link 
+                                    :href="'/vehiculos/' + vehiculo.id + '/edit'" 
+                                    class="text-indigo-600 hover:text-indigo-900 font-bold bg-indigo-50 px-3 py-1 rounded-md"
+                                >
+                                    Editar
+                                </Link>
                             </tr>
                             <tr v-if="vehiculos.length === 0">
                                 <td colspan="7" class="px-6 py-4 text-center text-gray-500 italic">No hay vehículos registrados.</td>
