@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../wayfinder'
 /**
 * @see \App\Http\Controllers\VehicleController::index
- * @see app/Http/Controllers/VehicleController.php:14
+ * @see app/Http/Controllers/VehicleController.php:16
  * @route '/vehiculos'
  */
 export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ index.definition = {
 
 /**
 * @see \App\Http\Controllers\VehicleController::index
- * @see app/Http/Controllers/VehicleController.php:14
+ * @see app/Http/Controllers/VehicleController.php:16
  * @route '/vehiculos'
  */
 index.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ index.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\VehicleController::index
- * @see app/Http/Controllers/VehicleController.php:14
+ * @see app/Http/Controllers/VehicleController.php:16
  * @route '/vehiculos'
  */
 index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -34,7 +34,7 @@ index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\VehicleController::index
- * @see app/Http/Controllers/VehicleController.php:14
+ * @see app/Http/Controllers/VehicleController.php:16
  * @route '/vehiculos'
  */
 index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -44,7 +44,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
     /**
 * @see \App\Http\Controllers\VehicleController::index
- * @see app/Http/Controllers/VehicleController.php:14
+ * @see app/Http/Controllers/VehicleController.php:16
  * @route '/vehiculos'
  */
     const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -54,7 +54,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
             /**
 * @see \App\Http\Controllers\VehicleController::index
- * @see app/Http/Controllers/VehicleController.php:14
+ * @see app/Http/Controllers/VehicleController.php:16
  * @route '/vehiculos'
  */
         indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -63,7 +63,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
             /**
 * @see \App\Http\Controllers\VehicleController::index
- * @see app/Http/Controllers/VehicleController.php:14
+ * @see app/Http/Controllers/VehicleController.php:16
  * @route '/vehiculos'
  */
         indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -79,7 +79,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     index.form = indexForm
 /**
 * @see \App\Http\Controllers\VehicleController::create
- * @see app/Http/Controllers/VehicleController.php:22
+ * @see app/Http/Controllers/VehicleController.php:24
  * @route '/vehiculos/create'
  */
 export const create = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -94,7 +94,7 @@ create.definition = {
 
 /**
 * @see \App\Http\Controllers\VehicleController::create
- * @see app/Http/Controllers/VehicleController.php:22
+ * @see app/Http/Controllers/VehicleController.php:24
  * @route '/vehiculos/create'
  */
 create.url = (options?: RouteQueryOptions) => {
@@ -103,7 +103,7 @@ create.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\VehicleController::create
- * @see app/Http/Controllers/VehicleController.php:22
+ * @see app/Http/Controllers/VehicleController.php:24
  * @route '/vehiculos/create'
  */
 create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -112,7 +112,7 @@ create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\VehicleController::create
- * @see app/Http/Controllers/VehicleController.php:22
+ * @see app/Http/Controllers/VehicleController.php:24
  * @route '/vehiculos/create'
  */
 create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -122,7 +122,7 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
     /**
 * @see \App\Http\Controllers\VehicleController::create
- * @see app/Http/Controllers/VehicleController.php:22
+ * @see app/Http/Controllers/VehicleController.php:24
  * @route '/vehiculos/create'
  */
     const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -132,7 +132,7 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
             /**
 * @see \App\Http\Controllers\VehicleController::create
- * @see app/Http/Controllers/VehicleController.php:22
+ * @see app/Http/Controllers/VehicleController.php:24
  * @route '/vehiculos/create'
  */
         createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -141,7 +141,7 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
             /**
 * @see \App\Http\Controllers\VehicleController::create
- * @see app/Http/Controllers/VehicleController.php:22
+ * @see app/Http/Controllers/VehicleController.php:24
  * @route '/vehiculos/create'
  */
         createForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -157,7 +157,7 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     create.form = createForm
 /**
 * @see \App\Http\Controllers\VehicleController::store
- * @see app/Http/Controllers/VehicleController.php:75
+ * @see app/Http/Controllers/VehicleController.php:82
  * @route '/vehiculos'
  */
 export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -172,7 +172,7 @@ store.definition = {
 
 /**
 * @see \App\Http\Controllers\VehicleController::store
- * @see app/Http/Controllers/VehicleController.php:75
+ * @see app/Http/Controllers/VehicleController.php:82
  * @route '/vehiculos'
  */
 store.url = (options?: RouteQueryOptions) => {
@@ -181,7 +181,7 @@ store.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\VehicleController::store
- * @see app/Http/Controllers/VehicleController.php:75
+ * @see app/Http/Controllers/VehicleController.php:82
  * @route '/vehiculos'
  */
 store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -191,7 +191,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
     /**
 * @see \App\Http\Controllers\VehicleController::store
- * @see app/Http/Controllers/VehicleController.php:75
+ * @see app/Http/Controllers/VehicleController.php:82
  * @route '/vehiculos'
  */
     const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -201,7 +201,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
             /**
 * @see \App\Http\Controllers\VehicleController::store
- * @see app/Http/Controllers/VehicleController.php:75
+ * @see app/Http/Controllers/VehicleController.php:82
  * @route '/vehiculos'
  */
         storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -309,7 +309,7 @@ show.head = (args: { vehiculo: string | number } | [vehiculo: string | number ] 
     show.form = showForm
 /**
 * @see \App\Http\Controllers\VehicleController::edit
- * @see app/Http/Controllers/VehicleController.php:119
+ * @see app/Http/Controllers/VehicleController.php:126
  * @route '/vehiculos/{vehiculo}/edit'
  */
 export const edit = (args: { vehiculo: string | number } | [vehiculo: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -324,7 +324,7 @@ edit.definition = {
 
 /**
 * @see \App\Http\Controllers\VehicleController::edit
- * @see app/Http/Controllers/VehicleController.php:119
+ * @see app/Http/Controllers/VehicleController.php:126
  * @route '/vehiculos/{vehiculo}/edit'
  */
 edit.url = (args: { vehiculo: string | number } | [vehiculo: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -352,7 +352,7 @@ edit.url = (args: { vehiculo: string | number } | [vehiculo: string | number ] |
 
 /**
 * @see \App\Http\Controllers\VehicleController::edit
- * @see app/Http/Controllers/VehicleController.php:119
+ * @see app/Http/Controllers/VehicleController.php:126
  * @route '/vehiculos/{vehiculo}/edit'
  */
 edit.get = (args: { vehiculo: string | number } | [vehiculo: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -361,7 +361,7 @@ edit.get = (args: { vehiculo: string | number } | [vehiculo: string | number ] |
 })
 /**
 * @see \App\Http\Controllers\VehicleController::edit
- * @see app/Http/Controllers/VehicleController.php:119
+ * @see app/Http/Controllers/VehicleController.php:126
  * @route '/vehiculos/{vehiculo}/edit'
  */
 edit.head = (args: { vehiculo: string | number } | [vehiculo: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -371,7 +371,7 @@ edit.head = (args: { vehiculo: string | number } | [vehiculo: string | number ] 
 
     /**
 * @see \App\Http\Controllers\VehicleController::edit
- * @see app/Http/Controllers/VehicleController.php:119
+ * @see app/Http/Controllers/VehicleController.php:126
  * @route '/vehiculos/{vehiculo}/edit'
  */
     const editForm = (args: { vehiculo: string | number } | [vehiculo: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -381,7 +381,7 @@ edit.head = (args: { vehiculo: string | number } | [vehiculo: string | number ] 
 
             /**
 * @see \App\Http\Controllers\VehicleController::edit
- * @see app/Http/Controllers/VehicleController.php:119
+ * @see app/Http/Controllers/VehicleController.php:126
  * @route '/vehiculos/{vehiculo}/edit'
  */
         editForm.get = (args: { vehiculo: string | number } | [vehiculo: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -390,7 +390,7 @@ edit.head = (args: { vehiculo: string | number } | [vehiculo: string | number ] 
         })
             /**
 * @see \App\Http\Controllers\VehicleController::edit
- * @see app/Http/Controllers/VehicleController.php:119
+ * @see app/Http/Controllers/VehicleController.php:126
  * @route '/vehiculos/{vehiculo}/edit'
  */
         editForm.head = (args: { vehiculo: string | number } | [vehiculo: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -406,7 +406,7 @@ edit.head = (args: { vehiculo: string | number } | [vehiculo: string | number ] 
     edit.form = editForm
 /**
 * @see \App\Http\Controllers\VehicleController::update
- * @see app/Http/Controllers/VehicleController.php:131
+ * @see app/Http/Controllers/VehicleController.php:138
  * @route '/vehiculos/{vehiculo}'
  */
 export const update = (args: { vehiculo: string | number } | [vehiculo: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -421,7 +421,7 @@ update.definition = {
 
 /**
 * @see \App\Http\Controllers\VehicleController::update
- * @see app/Http/Controllers/VehicleController.php:131
+ * @see app/Http/Controllers/VehicleController.php:138
  * @route '/vehiculos/{vehiculo}'
  */
 update.url = (args: { vehiculo: string | number } | [vehiculo: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -449,7 +449,7 @@ update.url = (args: { vehiculo: string | number } | [vehiculo: string | number ]
 
 /**
 * @see \App\Http\Controllers\VehicleController::update
- * @see app/Http/Controllers/VehicleController.php:131
+ * @see app/Http/Controllers/VehicleController.php:138
  * @route '/vehiculos/{vehiculo}'
  */
 update.put = (args: { vehiculo: string | number } | [vehiculo: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -458,7 +458,7 @@ update.put = (args: { vehiculo: string | number } | [vehiculo: string | number ]
 })
 /**
 * @see \App\Http\Controllers\VehicleController::update
- * @see app/Http/Controllers/VehicleController.php:131
+ * @see app/Http/Controllers/VehicleController.php:138
  * @route '/vehiculos/{vehiculo}'
  */
 update.patch = (args: { vehiculo: string | number } | [vehiculo: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -468,7 +468,7 @@ update.patch = (args: { vehiculo: string | number } | [vehiculo: string | number
 
     /**
 * @see \App\Http\Controllers\VehicleController::update
- * @see app/Http/Controllers/VehicleController.php:131
+ * @see app/Http/Controllers/VehicleController.php:138
  * @route '/vehiculos/{vehiculo}'
  */
     const updateForm = (args: { vehiculo: string | number } | [vehiculo: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -483,7 +483,7 @@ update.patch = (args: { vehiculo: string | number } | [vehiculo: string | number
 
             /**
 * @see \App\Http\Controllers\VehicleController::update
- * @see app/Http/Controllers/VehicleController.php:131
+ * @see app/Http/Controllers/VehicleController.php:138
  * @route '/vehiculos/{vehiculo}'
  */
         updateForm.put = (args: { vehiculo: string | number } | [vehiculo: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -497,7 +497,7 @@ update.patch = (args: { vehiculo: string | number } | [vehiculo: string | number
         })
             /**
 * @see \App\Http\Controllers\VehicleController::update
- * @see app/Http/Controllers/VehicleController.php:131
+ * @see app/Http/Controllers/VehicleController.php:138
  * @route '/vehiculos/{vehiculo}'
  */
         updateForm.patch = (args: { vehiculo: string | number } | [vehiculo: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -513,7 +513,7 @@ update.patch = (args: { vehiculo: string | number } | [vehiculo: string | number
     update.form = updateForm
 /**
 * @see \App\Http\Controllers\VehicleController::destroy
- * @see app/Http/Controllers/VehicleController.php:170
+ * @see app/Http/Controllers/VehicleController.php:177
  * @route '/vehiculos/{vehiculo}'
  */
 export const destroy = (args: { vehiculo: string | number } | [vehiculo: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -528,7 +528,7 @@ destroy.definition = {
 
 /**
 * @see \App\Http\Controllers\VehicleController::destroy
- * @see app/Http/Controllers/VehicleController.php:170
+ * @see app/Http/Controllers/VehicleController.php:177
  * @route '/vehiculos/{vehiculo}'
  */
 destroy.url = (args: { vehiculo: string | number } | [vehiculo: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -556,7 +556,7 @@ destroy.url = (args: { vehiculo: string | number } | [vehiculo: string | number 
 
 /**
 * @see \App\Http\Controllers\VehicleController::destroy
- * @see app/Http/Controllers/VehicleController.php:170
+ * @see app/Http/Controllers/VehicleController.php:177
  * @route '/vehiculos/{vehiculo}'
  */
 destroy.delete = (args: { vehiculo: string | number } | [vehiculo: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -566,7 +566,7 @@ destroy.delete = (args: { vehiculo: string | number } | [vehiculo: string | numb
 
     /**
 * @see \App\Http\Controllers\VehicleController::destroy
- * @see app/Http/Controllers/VehicleController.php:170
+ * @see app/Http/Controllers/VehicleController.php:177
  * @route '/vehiculos/{vehiculo}'
  */
     const destroyForm = (args: { vehiculo: string | number } | [vehiculo: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -581,7 +581,7 @@ destroy.delete = (args: { vehiculo: string | number } | [vehiculo: string | numb
 
             /**
 * @see \App\Http\Controllers\VehicleController::destroy
- * @see app/Http/Controllers/VehicleController.php:170
+ * @see app/Http/Controllers/VehicleController.php:177
  * @route '/vehiculos/{vehiculo}'
  */
         destroyForm.delete = (args: { vehiculo: string | number } | [vehiculo: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -597,7 +597,7 @@ destroy.delete = (args: { vehiculo: string | number } | [vehiculo: string | numb
     destroy.form = destroyForm
 /**
 * @see \App\Http\Controllers\VehicleController::importMethod
- * @see app/Http/Controllers/VehicleController.php:31
+ * @see app/Http/Controllers/VehicleController.php:33
  * @route '/vehiculos/importar'
  */
 export const importMethod = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -612,7 +612,7 @@ importMethod.definition = {
 
 /**
 * @see \App\Http\Controllers\VehicleController::importMethod
- * @see app/Http/Controllers/VehicleController.php:31
+ * @see app/Http/Controllers/VehicleController.php:33
  * @route '/vehiculos/importar'
  */
 importMethod.url = (options?: RouteQueryOptions) => {
@@ -621,7 +621,7 @@ importMethod.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\VehicleController::importMethod
- * @see app/Http/Controllers/VehicleController.php:31
+ * @see app/Http/Controllers/VehicleController.php:33
  * @route '/vehiculos/importar'
  */
 importMethod.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -631,7 +631,7 @@ importMethod.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
     /**
 * @see \App\Http\Controllers\VehicleController::importMethod
- * @see app/Http/Controllers/VehicleController.php:31
+ * @see app/Http/Controllers/VehicleController.php:33
  * @route '/vehiculos/importar'
  */
     const importMethodForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -641,7 +641,7 @@ importMethod.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
             /**
 * @see \App\Http\Controllers\VehicleController::importMethod
- * @see app/Http/Controllers/VehicleController.php:31
+ * @see app/Http/Controllers/VehicleController.php:33
  * @route '/vehiculos/importar'
  */
         importMethodForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -652,7 +652,7 @@ importMethod.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     importMethod.form = importMethodForm
 /**
 * @see \App\Http\Controllers\VehicleController::historial
- * @see app/Http/Controllers/VehicleController.php:158
+ * @see app/Http/Controllers/VehicleController.php:165
  * @route '/vehiculos/{id}/historial'
  */
 export const historial = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -667,7 +667,7 @@ historial.definition = {
 
 /**
 * @see \App\Http\Controllers\VehicleController::historial
- * @see app/Http/Controllers/VehicleController.php:158
+ * @see app/Http/Controllers/VehicleController.php:165
  * @route '/vehiculos/{id}/historial'
  */
 historial.url = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -695,7 +695,7 @@ historial.url = (args: { id: string | number } | [id: string | number ] | string
 
 /**
 * @see \App\Http\Controllers\VehicleController::historial
- * @see app/Http/Controllers/VehicleController.php:158
+ * @see app/Http/Controllers/VehicleController.php:165
  * @route '/vehiculos/{id}/historial'
  */
 historial.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -704,7 +704,7 @@ historial.get = (args: { id: string | number } | [id: string | number ] | string
 })
 /**
 * @see \App\Http\Controllers\VehicleController::historial
- * @see app/Http/Controllers/VehicleController.php:158
+ * @see app/Http/Controllers/VehicleController.php:165
  * @route '/vehiculos/{id}/historial'
  */
 historial.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -714,7 +714,7 @@ historial.head = (args: { id: string | number } | [id: string | number ] | strin
 
     /**
 * @see \App\Http\Controllers\VehicleController::historial
- * @see app/Http/Controllers/VehicleController.php:158
+ * @see app/Http/Controllers/VehicleController.php:165
  * @route '/vehiculos/{id}/historial'
  */
     const historialForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -724,7 +724,7 @@ historial.head = (args: { id: string | number } | [id: string | number ] | strin
 
             /**
 * @see \App\Http\Controllers\VehicleController::historial
- * @see app/Http/Controllers/VehicleController.php:158
+ * @see app/Http/Controllers/VehicleController.php:165
  * @route '/vehiculos/{id}/historial'
  */
         historialForm.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -733,7 +733,7 @@ historial.head = (args: { id: string | number } | [id: string | number ] | strin
         })
             /**
 * @see \App\Http\Controllers\VehicleController::historial
- * @see app/Http/Controllers/VehicleController.php:158
+ * @see app/Http/Controllers/VehicleController.php:165
  * @route '/vehiculos/{id}/historial'
  */
         historialForm.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({

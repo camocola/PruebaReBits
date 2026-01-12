@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Email;
 
 class VehicleController extends Controller
 {
@@ -41,16 +43,18 @@ class VehicleController extends Controller
         array_shift($rows); // Quitar encabezados
 
         foreach ($rows as $row) {
-            // 1. Crear o buscar al dueño
+            // Crear o buscar al dueño
             $user = User::firstOrCreate(
                 ['email' => $row[2]], 
                 [
-                    'name' => $row[0] . ' ' . $row[1], 
+                    'name' => $row[0] . ' ' . $row[1],
+                    'nombre' => $row[0],
+                    'apellidos' => $row[1],
                     'password' => bcrypt('password123')
                 ]
             );
 
-            // 2. Crear o buscar el vehículo por patente
+            // Crear o buscar el vehículo por patente
             $vehiculo = Vehicle::firstOrCreate(
                 ['patente' => $row[5]], 
                 [
@@ -62,11 +66,14 @@ class VehicleController extends Controller
                 ]
             );
 
-            // 3. Registrar siempre en el historial si el vehículo es nuevo
+            // Registrar siempre en el historial si el vehículo es nuevo
             if ($vehiculo->wasRecentlyCreated) {
                 $vehiculo->owners()->attach($user->id, ['fecha_adquisicion' => now()]);
             }
         }
+
+        // Enviar mail de confirmación
+        Mail::to('support@rebits.cl')->send(new Email('Éxito', 'La carga del archivo Excel se completó correctamente.'));
 
         return redirect('/vehiculos')->with('message', 'Vehículos cargados correctamente.');
     }
